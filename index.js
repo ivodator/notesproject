@@ -14,9 +14,9 @@ const typeDefs = gql`
     // Provide resolver functions for our schema fields
     const resolvers = {
         Query: {
-            hello: () => 'Hello World!'
-        }
-    };
+            hello: () => 'Hello world!',
+            notes: () => notes
+        },
 
     const app = express ();
 
@@ -31,3 +31,20 @@ const typeDefs = gql`
                 `GraphQL Server running at http://localhost:${port}${server.graphqlPath}`      
             )
         );
+
+let notes = [
+    { id:'1', content: 'This is a note', author: 'Adam Scott' },
+    { id:'1', content: 'This is another note', author: 'Harlow Everly' },
+    { id:'1', content: 'Oh hey look, another note!', author: 'Riley Harrison' }
+];
+
+type Note {
+    id: ID!
+    content: String!
+    author: String!
+}
+
+type Query {
+    hello: String!
+    notes: [Note!]!
+}
